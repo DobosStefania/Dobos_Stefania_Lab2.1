@@ -17,5 +17,7 @@ namespace Dobos_Stefania_Lab2._1.Data
         public DbSet<Dobos_Stefania_Lab2._1.Models.Book> Book { get; set; } = default!;
 
         public DbSet<Dobos_Stefania_Lab2._1.Models.Publisher> Publisher { get; set; }
+
+        public DbSet<Dobos_Stefania_Lab2._1.Models.Category> Category { get; set; }
     }
 }
