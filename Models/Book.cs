@@ -21,7 +21,5 @@ namespace Dobos_Stefania_Lab2._1.Models
 
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
-        public int? AuthorID { get; set; }
-        public Author? Author { get; set; }
     }
 }
