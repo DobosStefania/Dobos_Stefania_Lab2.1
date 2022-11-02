@@ -4,6 +4,7 @@ using Dobos_Stefania_Lab2._1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dobos_Stefania_Lab2._1.Migrations
 {
     [DbContext(typeof(Dobos_Stefania_Lab2_1Context))]
-    partial class Dobos_Stefania_Lab2_1ContextModelSnapshot : ModelSnapshot
+    [Migration("20221101131400_Author")]
+    partial class Author
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,46 +78,6 @@ namespace Dobos_Stefania_Lab2._1.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.BookCategory", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("BookID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BookID");
-
-                    b.HasIndex("CategoryID");
-
-                    b.ToTable("BookCategory");
-                });
-
-            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Category", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Publisher", b =>
                 {
                     b.Property<int>("ID")
@@ -148,38 +110,9 @@ namespace Dobos_Stefania_Lab2._1.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.BookCategory", b =>
-                {
-                    b.HasOne("Dobos_Stefania_Lab2._1.Models.Book", "Book")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("BookID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Dobos_Stefania_Lab2._1.Models.Category", "Category")
-                        .WithMany("BookCategories")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Author", b =>
                 {
                     b.Navigation("Books");
-                });
-
-            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Book", b =>
-                {
-                    b.Navigation("BookCategories");
-                });
-
-            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Category", b =>
-                {
-                    b.Navigation("BookCategories");
                 });
 
             modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Publisher", b =>

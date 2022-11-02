@@ -20,6 +20,8 @@ namespace Dobos_Stefania_Lab2._1.Pages.Books
         }
 
         public IList<Book> Book { get;set; } = default!;
+        public string TitleSort { get; set; }
+        public string AuthorSort { get; set; }
 
         public async Task OnGetAsync()
         {
