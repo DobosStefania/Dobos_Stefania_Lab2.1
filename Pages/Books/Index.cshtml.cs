@@ -20,17 +20,30 @@ namespace Dobos_Stefania_Lab2._1.Pages.Books
         }
 
         public IList<Book> Book { get;set; } = default!;
+        public int BookID { get; set; }
+        public int CategoryID { get; set; }
         public string TitleSort { get; set; }
         public string AuthorSort { get; set; }
+        public string CurrentFilter { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id, int? categoryID, string sortOrder, string
+searchString)
         {
-            if (_context.Book != null)
+         
+
+            TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            AuthorSort = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
+            CurrentFilter = searchString;
+    
+
+
+                if (_context.Book != null)
             {
                 Book = await _context.Book
                     .Include(b => b.Publisher)
                     .ToListAsync();
             }
-        }
+            
+            }
     }
 }
