@@ -26,5 +26,8 @@ namespace Dobos_Stefania_Lab2._1.Models
         public ICollection<BookCategory> BookCategories { get; set; }
          public int? AuthorID { get; set; }
         public Author? Author { get; set; }
+         
+      
+
     }
 }
