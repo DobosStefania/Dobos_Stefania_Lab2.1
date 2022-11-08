@@ -31,47 +31,45 @@ namespace Dobos_Stefania_Lab2._1.Pages.Books
 
         [BindProperty]
         public Book Book { get; set; }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(string[] selectedCategories)
         {
-            { 
-            var newBook = new Book();
-            if (selectedCategories != null)
             {
-                newBook.BookCategories = new List<BookCategory>();
-                foreach (var cat in selectedCategories)
+                var newBook = Book;
+                if (selectedCategories != null)
                 {
-                    var catToAdd = new BookCategory
+                    newBook.BookCategories = new List<BookCategory>();
+                    foreach (var cat in selectedCategories)
                     {
-                        CategoryID = int.Parse(cat)
-                    };
-                    newBook.BookCategories.Add(catToAdd);
+                        var catToAdd = new BookCategory
+                        {
+                            CategoryID = int.Parse(cat)
+                        };
+                        newBook.BookCategories.Add(catToAdd);
+                    }
                 }
-            }
-            if (await TryUpdateModelAsync<Book>(
-            newBook,
-            "Book",
-            i => i.Title, i => i.Author,
-            i => i.Price, i => i.PublishingDate, i => i.PublisherID))
-            {
-                _context.Book.Add(newBook);
+                //if (await TryUpdateModelAsync<Book>(
+                //newBook,
+                //"Book",
+                //i => i.Title, i => i.Author,
+                //i => i.Price, i => i.PublishingDate, i => i.PublisherID))
+                //{
+                //  _context.Book.Add(newBook);
+                //  await _context.SaveChangesAsync();
+                //   return RedirectToPage("./Index");
+                //}
+
+
+                _context.Book.Add(Book);
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToPage("./Index");
-            }
-            PopulateAssignedCategoryData(_context, newBook);
-            return Page();
-        }
-          if (!ModelState.IsValid)
-            {
+                PopulateAssignedCategoryData(_context, newBook);
                 return Page();
             }
-
-            _context.Book.Add(Book);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }
