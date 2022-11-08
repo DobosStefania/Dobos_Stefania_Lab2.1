@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Dobos_Stefania_Lab2._1.Data;
 using Dobos_Stefania_Lab2._1.Models;
-using static Dobos_Stefania_Lab2._1.Models.ViewModels;
 
 namespace Dobos_Stefania_Lab2._1.Pages.Publishers
 {
@@ -21,14 +14,14 @@ namespace Dobos_Stefania_Lab2._1.Pages.Publishers
         }
 
         public IList<Publisher> Publisher { get;set; } = default!;
-        public PublisherIndexData PublisherData { get; set; }
+        public Models.ViewModels.PublisherIndexData PublisherData { get; set; }
         public int PublisherID { get; set; }
         public int BookID { get; set; }
 
 
         public async Task OnGetAsync(int? id, int? bookID)
         {
-            PublisherData = new PublisherIndexData();
+            PublisherData = new Models.ViewModels.PublisherIndexData();
             PublisherData.Publishers = await _context.Publisher
             .Include(i=>i.Books)
             .ThenInclude(c => c.Author)
