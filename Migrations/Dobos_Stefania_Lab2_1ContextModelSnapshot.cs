@@ -148,6 +148,40 @@ namespace Dobos_Stefania_Lab2._1.Migrations
                     b.Navigation("Publisher");
                 });
 
+            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.BookCategory", b =>
+                {
+                    b.HasOne("Dobos_Stefania_Lab2._1.Models.Book", "Book")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Dobos_Stefania_Lab2._1.Models.Category", "Category")
+                        .WithMany("BookCategories")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Author", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Book", b =>
+                {
+                    b.Navigation("BookCategories");
+                });
+
+            modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Category", b =>
+                {
+                    b.Navigation("BookCategories");
+                });
+
             modelBuilder.Entity("Dobos_Stefania_Lab2._1.Models.Publisher", b =>
                 {
                     b.Navigation("Books");
