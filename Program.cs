@@ -5,7 +5,12 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Books");
+    options.Conventions.AllowAnonymousToPage("/Books/Index");
+    options.Conventions.AllowAnonymousToPage("/Books/Details");
+});
 builder.Services.AddDbContext<Dobos_Stefania_Lab2_1Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Dobos_Stefania_Lab2_1Context") ?? throw new InvalidOperationException("Connection string 'Dobos_Stefania_Lab2_1Context' not found.")));
 
@@ -14,6 +19,7 @@ builder.Services.AddDbContext<LibraryIdentityContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("Dobos_Stefania_Lab2_1Context") ?? throw new InvalidOperationException("Connection string 'Dobos_Stefania_Lab2_1Context' not found.")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
  .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 
